@@ -59,7 +59,7 @@ Made by @FayasNoushad"""
 
 ABOUT_TEXT = """--**About Me**-- 😎
 
-🤖 Name : [Attach Bot]({})
+🤖 Name : [Attach Bot](https://telegram.me/{})
 
 👨‍💻 Developer : [Fayas](https://github.com/FayasNoushad)
 
@@ -136,7 +136,7 @@ async def cb_handler(bot, update):
         )
     elif update.data == "about":
         await update.message.edit_text(
-            text=ABOUT_TEXT,
+            text=ABOUT_TEXT.format((await bot.get_me()).username),
             reply_markup=ABOUT_BUTTONS,
             disable_web_page_preview=True
         )
@@ -173,7 +173,7 @@ async def about(bot, update):
     if not await db.is_user_exist(update.from_user.id):
             await db.add_user(update.from_user.id)
     await update.reply_text(
-        text=ABOUT_TEXT.format(update.from_user.mention),
+        text=ABOUT_TEXT.format((await bot.get_me()).username),
         disable_web_page_preview=True,
         reply_markup=ABOUT_BUTTONS,
         quote=True
